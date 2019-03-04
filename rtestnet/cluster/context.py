@@ -6,7 +6,7 @@ from dataclasses import dataclass
 class ClusterContext:
     conf_dir: Path
     private_dir: Path = None
-    kill_jobs = False
+    kill_jobs: bool = False
 
     def __post_init__(self):
         if not self.private_dir:

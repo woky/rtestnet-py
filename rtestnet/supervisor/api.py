@@ -13,8 +13,9 @@ CONFIG_DIR = '/home/woky/rchain/20wip/public-testnet/data/config'
 app = Quart(__name__)
 cluster = ClusterCtl(ClusterContext(CONFIG_DIR, kill_jobs=True))
 
-@app.route('/cluster/control/nodes/<node>/<action>', methods=['POST'])
-async def handle_node_ctl(*, node, action):
+@app.route('/supervisor/notify/nodes/<node>/<event>', methods=['POST'])
+async def handle_node_notify(node, event):
+
     req = {'node': node, 'action': action, 'args': request.args.to_dict()}
     try:
         await cluster.dispatch(req)
